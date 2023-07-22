@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quost/pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:quost/pages/signup_page.dart';
+import 'package:quost/pages/key_confirmation_page.dart';
+import 'package:quost/notifiers/account_notifier.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,7 +15,17 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Quost'),
+      home: Scaffold(
+        body: Consumer<AccountNotifier>(
+          builder: (context, accountNotifier, child) {
+            if(accountNotifier.account == null) {
+              return const SignUpPage();
+            } else {
+              return const KeyConfirmationPage();
+            }
+          }
+        )
+      )
     );
   }
 }
