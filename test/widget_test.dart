@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (tester) async {
+  testWidgets('Create account(nsec/npub)', (tester) async {
     quost.main();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text("Sign up for an account."), findsOneWidget);
+    expect(find.textContaining('nsec'), findsNothing);
+    expect(find.textContaining('npub'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.textContaining('nsec'), findsOneWidget);
+    expect(find.textContaining('npub'), findsOneWidget);
   });
 }
